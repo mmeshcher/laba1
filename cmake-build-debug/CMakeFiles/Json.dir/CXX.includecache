@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Json.hpp
+any
+-
+string
+-
+iostream
+-
+vector
+-
+map
+-
+typeinfo
+-
+fstream
+-
+
+/cygdrive/c/Git/lab-01-parser/sources/Json.cpp
+Json.hpp
+-
+
