@@ -34,7 +34,8 @@ enum TokenType {
 struct Token {
     std::string m_value;
     TokenType m_type;
-    Token(std::string value = "", TokenType type = UNKNOWN) : m_value(value), m_type(type) {}
+    Token(std::string value = "", TokenType type = UNKNOWN)
+     : m_value(value), m_type(type) {}
 };
 
 class Json {
@@ -53,7 +54,7 @@ public:
     std::any& operator[](int i);
 
 private:
-	
+
     static bool IsWhitespace(const char c);
     static int NextWhitespace(const std::string& source, int i);
     static int SkipWhitespaces(const std::string& source, int i);

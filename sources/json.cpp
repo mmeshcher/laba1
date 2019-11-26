@@ -100,9 +100,9 @@ bool Json::is_object() const
     return type == JOBJECT;
 }
 
-// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------
 #pragma mark - Tokenize
-// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------
 
 bool Json::IsWhitespace(const char c) {
     return isspace(c);
@@ -146,7 +146,8 @@ std::vector<Token> Json::Tokenize(std::string source) {
                 size_t tmp_k = k + 1;
                 while (tmp_k < str.length() && (str[tmp_k] != '"'
                 || str[tmp_k - 1] == '\\')) tmp_k++;
-                tokens.push_back(Token(str.substr(k + 1, tmp_k - k - 1), STRING));
+                tokens.push_back(
+                    Token(str.substr(k + 1, tmp_k - k - 1), STRING));
                 k = tmp_k + 1;
                 continue;
             }
@@ -154,7 +155,8 @@ std::vector<Token> Json::Tokenize(std::string source) {
                 size_t tmp_k = k + 1;
                 while (tmp_k < str.length() && (str[tmp_k] != '\''
                 || str[tmp_k - 1] == '\\')) tmp_k++;
-                tokens.push_back(Token(str.substr(k + 1, tmp_k - k - 1), STRING));
+                tokens.push_back(
+                    Token(str.substr(k + 1, tmp_k - k - 1), STRING));
                 k = tmp_k + 1;
                 continue;
             }
@@ -163,17 +165,20 @@ std::vector<Token> Json::Tokenize(std::string source) {
                 k++;
                 continue;
             }
-            if (str[k] == 't' && k + 3 < str.length() && str.substr(k, 4) == "true") {
+            if (str[k] == 't' && k + 3 < str.length() 
+                && str.substr(k, 4) == "true") {
                 tokens.push_back(Token("true", BOOLEAN));
                 k += 4;
                 continue;
             }
-            if (str[k] == 'f' && k + 4 < str.length() && str.substr(k, 5) == "false") {
+            if (str[k] == 'f' && k + 4 < str.length() 
+                && str.substr(k, 5) == "false") {
                 tokens.push_back(Token("false", BOOLEAN));
                 k += 5;
                 continue;
             }
-            if (str[k] == 'n' && k + 3 < str.length() && str.substr(k, 4) == "null") {
+            if (str[k] == 'n' && k + 3 < str.length() 
+                && str.substr(k, 4) == "null") {
                 tokens.push_back(Token("null", NUL));
                 k += 4;
                 continue;
@@ -221,9 +226,9 @@ std::vector<Token> Json::Tokenize(std::string source) {
     return tokens;
 }
 
-// ----------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 #pragma mark - Parse
-// ----------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 Json Json::JsonParse(std::vector<Token> v, int i, int& r) {
     Json current;
