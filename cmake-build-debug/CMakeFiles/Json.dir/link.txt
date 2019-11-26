@@ -1,2 +1,0 @@
-/usr/bin/ar.exe qc libJsond.a  CMakeFiles/Json.dir/sources/Json.cpp.o
-/usr/bin/ranlib.exe libJsond.a
