@@ -11,10 +11,6 @@
 #include <algorithm>
 #include "json.h"
 
-// --------------------------a--------------------------------------------------------------------------------------
-#pragma mark - Json Value
-// ----------------------------------------------------------------------------------------------------------------
-
 Json::Json()
 {
     this->type = JUNKNOWN;
@@ -74,8 +70,7 @@ std::any& Json::operator[](int i) {
     if (type == JOBJECT) {
         return prop[i].second;
     }
-    std::any res = std::any(Json());
-    return res;
+    throw std::logic_error("Index out of range");
 }
 std::any& Json::operator[](const std::string& s) {
     auto found = std::find_if(prop.begin(), prop.end(), [s](const auto &a) {
@@ -83,8 +78,7 @@ std::any& Json::operator[](const std::string& s) {
     });
     if (found == prop.end())
     {
-        std::any res = std::any(Json());
-        return res;
+        throw std::logic_error("Invalid property name");
     }
 
     return (*found).second;
@@ -99,10 +93,6 @@ bool Json::is_object() const
 {
     return type == JOBJECT;
 }
-
-// ----------------------------------------------------------------
-#pragma mark - Tokenize
-// ----------------------------------------------------------------
 
 bool Json::IsWhitespace(const char c) {
     return isspace(c);
@@ -226,10 +216,6 @@ std::vector<Token> Json::Tokenize(std::string source) {
     return tokens;
 }
 
-// ------------------------------------------------------------------------
-#pragma mark - Parse
-// ------------------------------------------------------------------------
-
 Json Json::JsonParse(std::vector<Token> v, int i, int& r) {
     Json current;
     try
@@ -287,7 +273,7 @@ Json Json::JsonParse(std::vector<Token> v, int i, int& r) {
             return current;
         }
     }
-    catch (exception e)
+    catch (std::exception e)
     {
         std::cout << "Exception";
     }
