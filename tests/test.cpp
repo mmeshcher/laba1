@@ -1,7 +1,7 @@
 // Copyright mmeshcher
 
 #include <gtest/gtest.h>
-#include <Json.hpp>
+#include <json.h>
 TEST(Parse, Text) {
   std::string json =
       "{ \"lastname\" : \"Ivanov\" , \"firstname\" : \"Ivan\" "
