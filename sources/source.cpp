@@ -1,6 +1,6 @@
 // Copyright 2019 mmeshcher
 #include <iostream>
-#include "json.h"
+#include <json.h>
 
 int main() {
     std::string text;
