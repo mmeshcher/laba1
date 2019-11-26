@@ -9,8 +9,8 @@
 #include <string>
 
 using namespace std;
-int main(int argc, const char * argv[]) {
-    std::cout << "In\n";
+int main() {
+    /*std::cout << "In\n";
     Json object = Json::parseFile("data.json");
     std::cout << "out\n";
     auto it1 = object["lastname"];
@@ -43,13 +43,13 @@ int main(int argc, const char * argv[]) {
     // // you can use jute::parser::parse_file("data.json")
 
     // cout << " ------ " << endl;
-    // cout << v["examples"][0]["attr"][0]["value"].as_string() << endl;
+    // cout << v["examples"][0]["attr"][0]["m_value"].as_string() << endl;
     // if (v["examples"][1]["mixed"][5][1][1].as_bool()) {
     //     cout << v["examples"][1]["pie"].as_double() << endl;
     //     cout << v["examples"][2].to_string() << endl;
     // }
 
     // cout << v["examples"].to_string() << endl;
-
+*/
     return 0;
 }

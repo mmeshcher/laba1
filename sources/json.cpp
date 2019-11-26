@@ -9,10 +9,7 @@
 #include <any>
 #include <utility>
 #include <algorithm>
-#include <filesystem>
 #include "json.h"
-
-using namespace std;
 
 // ----------------------------------------------------------------------------------------------------------------
 #pragma mark - Json Value
@@ -27,13 +24,13 @@ Json::Json(const std::string& s)
 	Json::parse(s);
 }
 
-std::any Json::ConvertType(const string& str, Type type)
+std::any Json::ConvertType(const std::string& str, Type tp)
 {
-	if (type == JSTRING)
+	if (tp == JSTRING)
 		return std::any(str);
-	if (type == JBOOLEAN)
+	if (tp == JBOOLEAN)
 		return std::any(str == "true" ? true : false);
-	if (type == JNUMBER)
+	if (tp == JNUMBER)
 		return std::any(atoi(str.c_str()));
 	return std::any(str);
 }
@@ -41,25 +38,23 @@ std::any Json::ConvertType(const string& str, Type type)
 void Json::set_type(Type tp) {
 	type = tp;
 }
-void Json::add_property(string key, Json v) {
+void Json::add_property(std::string new_key, Json v) {
 	if (v.type != JARRAY && v.type != JOBJECT)
 	{
-		prop.push_back(make_pair(key, ConvertType(v.key, v.type)));
-	} else
-	{
-		prop.push_back(make_pair(key, std::any(v)));
+		prop.push_back(make_pair(new_key, ConvertType(v.key, v.type)));
+	} else {
+		prop.push_back(make_pair(new_key, std::any(v)));
 	}
 }
 void Json::add_element(Json v) {
 	if (v.type != JARRAY && v.type != JOBJECT)
 	{
 		arr.push_back(ConvertType(v.key, v.type));
-	} else
-	{
+	} else {
 		arr.push_back(std::any(v));
 	}
 }
-void Json::set_string(string s) {
+void Json::set_string(std::string s) {
 	if (type == JSTRING)
 		value = std::any(s);
 	if (type == JNUMBER)
@@ -76,8 +71,6 @@ std::any& Json::operator[](int i) {
 	if (type == JOBJECT) {
 		return prop[i].second;
 	}
-	//    if (type == JSTRING || type == JNUMBER || type == JBOOLEAN)
-	//        return value;
 	std::any res = std::any(Json());
 	return res;
 }
@@ -111,38 +104,38 @@ bool Json::is_object() const
 bool Json::IsWhitespace(const char c) {
 	return isspace(c);
 }
-int Json::NextWhitespace(const string& source, int i) {
-	while (i < (int)source.length()) {
+int Json::NextWhitespace(const std::string& source, int i) {
+	while (i < static_cast<int>(source.length())) {
 		if (source[i] == '"') {
 			i++;
-			while (i < (int)source.length()
+			while (i < static_cast<int>(source.length())
 			&& (source[i] != '"' || source[i - 1] == '\\')) i++;
 		}
 		if (source[i] == '\'') {
 			i++;
-			while (i < (int)source.length()
+			while (i < static_cast<int>(source.length())
 			&& (source[i] != '\'' || source[i - 1] == '\\')) i++;
 		}
 		if (IsWhitespace(source[i])) return i;
 		i++;
 	}
-	return (int)source.length();
+	return static_cast<int>(source.length());
 }
-int Json::SkipWhitespaces(const string& source, int i) {
-	while (i < (int)source.length()) {
+int Json::SkipWhitespaces(const std::string& source, int i) {
+	while (i < static_cast<int>(source.length())) {
 		if (!IsWhitespace(source[i])) return i;
 		i++;
 	}
 	return -1;
 }
 
-vector<Token> Json::Tokenize(string source) {
+std::vector<Token> Json::Tokenize(std::string source) {
 	source += " ";
-	vector<Token> tokens;
+    std::vector<Token> tokens;
 	int index = SkipWhitespaces(source, 0);
 	while (index >= 0) {
 		int next = NextWhitespace(source, index);
-		string str = source.substr(index, next - index);
+        std::string str = source.substr(index, next - index);
 
 		size_t k = 0;
 		while (k < str.length()) {
@@ -229,57 +222,57 @@ vector<Token> Json::Tokenize(string source) {
 #pragma mark - Parse
 // ----------------------------------------------------------------------------------------------------------------
 
-Json Json::JsonParse(vector<Token> v, int i, int& r) {
+Json Json::JsonParse(std::vector<Token> v, int i, int& r) {
 	Json current;
 	try
 	{
-		if (v[i].type == CROUSH_OPEN) {
+		if (v[i].m_type == CROUSH_OPEN) {
 			current.set_type(JOBJECT);
 			int k = i + 1;
-			while (v[k].type != CROUSH_CLOSE) {
-				string key = v[k].value;
+			while (v[k].m_type != CROUSH_CLOSE) {
+                std::string key = v[k].m_value;
 				k += 2; // k+1 should be ':'
 				int j = k;
 				Json vv = JsonParse(v, k, j);
 				current.add_property(key, vv);
 				k = j;
-				if (v[k].type == COMMA) k++;
+				if (v[k].m_type == COMMA) k++;
 			}
 			r = k + 1;
 			return current;
 		}
-		if (v[i].type == BRACKET_OPEN) {
+		if (v[i].m_type == BRACKET_OPEN) {
 			current.set_type(JARRAY);
 			int k = i + 1;
-			while (v[k].type != BRACKET_CLOSE) {
+			while (v[k].m_type != BRACKET_CLOSE) {
 				int j = k;
 				Json vv = JsonParse(v, k, j);
 				current.add_element(vv);
 				k = j;
-				if (v[k].type == COMMA) k++;
+				if (v[k].m_type == COMMA) k++;
 			}
 			r = k + 1;
 			return current;
 		}
-		if (v[i].type == NUMBER) {
+		if (v[i].m_type == NUMBER) {
 			current.set_type(JNUMBER);
-			current.set_string(v[i].value);
+			current.set_string(v[i].m_value);
 			r = i + 1;
 			return current;
 		}
-		if (v[i].type == STRING) {
+		if (v[i].m_type == STRING) {
 			current.set_type(JSTRING);
-			current.set_string(v[i].value);
+			current.set_string(v[i].m_value);
 			r = i + 1;
 			return current;
 		}
-		if (v[i].type == BOOLEAN) {
+		if (v[i].m_type == BOOLEAN) {
 			current.set_type(JBOOLEAN);
-			current.set_string(v[i].value);
+			current.set_string(v[i].m_value);
 			r = i + 1;
 			return current;
 		}
-		if (v[i].type == NUL) {
+		if (v[i].m_type == NUL) {
 			current.set_type(JNULL);
 			current.set_string("null");
 			r = i + 1;
@@ -293,20 +286,16 @@ Json Json::JsonParse(vector<Token> v, int i, int& r) {
 	return current;
 }
 
-Json Json::parse(const string& str) {
+Json Json::parse(const std::string& str) {
 	int k;
 	return JsonParse(Tokenize(str), 0, k);
 }
 
-Json Json::parseFile(const string& filename) {
-	ifstream in(filename.c_str());
-	/*auto it = std::filesystem::current_path();
-	if (!in)
-	{
-		return Json();
-	}*/
-	string str = "";
-	string tmp;
+Json Json::parseFile(const std::string& filename) {
+    std::ifstream in(filename.c_str());
+
+    std::string str = "";
+    std::string tmp;
 
 	while (getline(in, tmp)) str += tmp;
 	in.close();

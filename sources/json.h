@@ -7,7 +7,6 @@
 #include <any>
 #include <utility>
 
-using namespace std;
 
 enum Type {
 	JSTRING,
@@ -33,9 +32,9 @@ enum TokenType {
 };
 
 struct Token {
-	string value;
-	TokenType type;
-	Token(string value = "", TokenType type = UNKNOWN) : value(value), type(type) {}
+	std::string m_value;
+	TokenType m_type;
+	Token(std::string value = "", TokenType type = UNKNOWN) : m_value(value), m_type(type) {}
 };
 
 class Json {
@@ -63,11 +62,11 @@ private:
 	static Json JsonParse(std::vector<Token> v, int i, int& r);
 
 	void set_type(Type tp);
-	void add_property(string key, Json v);
+	void add_property(std::string new_key, Json v);
 	void add_element(Json v);
-	void set_string(string s);
+	void set_string(std::string s);
 
-	std::any ConvertType(const string& str, Type type);
+	std::any ConvertType(const std::string& str, Type type);
 
 protected:
 	std::string key;
