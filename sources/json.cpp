@@ -165,19 +165,19 @@ std::vector<Token> Json::Tokenize(std::string source) {
                 k++;
                 continue;
             }
-            if (str[k] == 't' && k + 3 < str.length() 
+            if (str[k] == 't' && k + 3 < str.length()
                 && str.substr(k, 4) == "true") {
                 tokens.push_back(Token("true", BOOLEAN));
                 k += 4;
                 continue;
             }
-            if (str[k] == 'f' && k + 4 < str.length() 
+            if (str[k] == 'f' && k + 4 < str.length()
                 && str.substr(k, 5) == "false") {
                 tokens.push_back(Token("false", BOOLEAN));
                 k += 5;
                 continue;
             }
-            if (str[k] == 'n' && k + 3 < str.length() 
+            if (str[k] == 'n' && k + 3 < str.length()
                 && str.substr(k, 4) == "null") {
                 tokens.push_back(Token("null", NUL));
                 k += 4;
