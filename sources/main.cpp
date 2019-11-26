@@ -1,3 +1,4 @@
+// Copyright 2019 <mmeshcher>
 //
 //  main.cpp
 //  JsonParser
@@ -8,9 +9,7 @@
 #include <string>
 
 using namespace std;
-
 int main(int argc, const char * argv[]) {
-
     std::cout << "In\n";
     Json object = Json::parseFile("data.json");
     std::cout << "out\n";

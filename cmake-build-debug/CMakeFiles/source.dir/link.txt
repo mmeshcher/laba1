@@ -1,0 +1,1 @@
+/usr/bin/c++.exe  -pedantic -Werror -Wall -Wextra -Wno-unused-command-line-argument -Wshadow -Wnon-virtual-dtor -g  -Wl,--enable-auto-import CMakeFiles/source.dir/sources/source.cpp.o  -o source.exe -Wl,--out-implib,libsource.dll.a -Wl,--major-image-version,0,--minor-image-version,0 libJsond.a 

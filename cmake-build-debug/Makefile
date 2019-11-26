@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /cygdrive/c/Users/zamot/.CLion2019.2/system/cygwin_cmake/bin/cmake.exe
+CMAKE_COMMAND = /cygdrive/c/Users/Xiaomi/.CLion2019.2/system/cygwin_cmake/bin/cmake.exe
 
 # The command to remove a file.
-RM = /cygdrive/c/Users/zamot/.CLion2019.2/system/cygwin_cmake/bin/cmake.exe -E remove -f
+RM = /cygdrive/c/Users/Xiaomi/.CLion2019.2/system/cygwin_cmake/bin/cmake.exe -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /cygdrive/c/Git/lab-01-parser
+CMAKE_SOURCE_DIR = /cygdrive/c/Users/Xiaomi/Desktop/labaC++/lab-01-parser/laba1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /cygdrive/c/Git/lab-01-parser/cmake-build-debug
+CMAKE_BINARY_DIR = /cygdrive/c/Users/Xiaomi/Desktop/labaC++/lab-01-parser/laba1/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /cygdrive/c/Git/lab-01-parser/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/cygdrive/c/Users/zamot/.CLion2019.2/system/cygwin_cmake/bin/cmake.exe -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/cygdrive/c/Users/Xiaomi/.CLion2019.2/system/cygwin_cmake/bin/cmake.exe -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/cygdrive/c/Users/zamot/.CLion2019.2/system/cygwin_cmake/bin/cmake.exe -E echo No\ interactive\ CMake\ dialog\ available.
+	/cygdrive/c/Users/Xiaomi/.CLion2019.2/system/cygwin_cmake/bin/cmake.exe -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -81,7 +81,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/cygdrive/c/Users/zamot/.CLion2019.2/system/cygwin_cmake/bin/ctest.exe --force-new-ctest-process $(ARGS)
+	/cygdrive/c/Users/Xiaomi/.CLion2019.2/system/cygwin_cmake/bin/ctest.exe --force-new-ctest-process $(ARGS)
 .PHONY : test
 
 # Special rule for the target test
@@ -91,9 +91,9 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Git/lab-01-parser/cmake-build-debug/CMakeFiles /cygdrive/c/Git/lab-01-parser/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/Xiaomi/Desktop/labaC++/lab-01-parser/laba1/cmake-build-debug/CMakeFiles /cygdrive/c/Users/Xiaomi/Desktop/labaC++/lab-01-parser/laba1/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Git/lab-01-parser/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/Xiaomi/Desktop/labaC++/lab-01-parser/laba1/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -148,6 +148,19 @@ main/fast:
 .PHONY : main/fast
 
 #=============================================================================
+# Target rules for targets named json3
+
+# Build rule for target.
+json3: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 json3
+.PHONY : json3
+
+# fast build rule for target.
+json3/fast:
+	$(MAKE) -f CMakeFiles/json3.dir/build.make CMakeFiles/json3.dir/build
+.PHONY : json3/fast
+
+#=============================================================================
 # Target rules for targets named Json
 
 # Build rule for target.
@@ -173,32 +186,59 @@ source/fast:
 	$(MAKE) -f CMakeFiles/source.dir/build.make CMakeFiles/source.dir/build
 .PHONY : source/fast
 
-sources/Json.o: sources/Json.cpp.o
+sources/json.o: sources/json.cpp.o
 
-.PHONY : sources/Json.o
+.PHONY : sources/json.o
 
 # target to build an object file
-sources/Json.cpp.o:
-	$(MAKE) -f CMakeFiles/Json.dir/build.make CMakeFiles/Json.dir/sources/Json.cpp.o
-.PHONY : sources/Json.cpp.o
+sources/json.cpp.o:
+	$(MAKE) -f CMakeFiles/Json.dir/build.make CMakeFiles/Json.dir/sources/json.cpp.o
+.PHONY : sources/json.cpp.o
 
-sources/Json.i: sources/Json.cpp.i
+sources/json.i: sources/json.cpp.i
 
-.PHONY : sources/Json.i
+.PHONY : sources/json.i
 
 # target to preprocess a source file
-sources/Json.cpp.i:
-	$(MAKE) -f CMakeFiles/Json.dir/build.make CMakeFiles/Json.dir/sources/Json.cpp.i
-.PHONY : sources/Json.cpp.i
+sources/json.cpp.i:
+	$(MAKE) -f CMakeFiles/Json.dir/build.make CMakeFiles/Json.dir/sources/json.cpp.i
+.PHONY : sources/json.cpp.i
 
-sources/Json.s: sources/Json.cpp.s
+sources/json.s: sources/json.cpp.s
 
-.PHONY : sources/Json.s
+.PHONY : sources/json.s
 
 # target to generate assembly for a file
-sources/Json.cpp.s:
-	$(MAKE) -f CMakeFiles/Json.dir/build.make CMakeFiles/Json.dir/sources/Json.cpp.s
-.PHONY : sources/Json.cpp.s
+sources/json.cpp.s:
+	$(MAKE) -f CMakeFiles/Json.dir/build.make CMakeFiles/Json.dir/sources/json.cpp.s
+.PHONY : sources/json.cpp.s
+
+sources/json3.o: sources/json3.cpp.o
+
+.PHONY : sources/json3.o
+
+# target to build an object file
+sources/json3.cpp.o:
+	$(MAKE) -f CMakeFiles/json3.dir/build.make CMakeFiles/json3.dir/sources/json3.cpp.o
+.PHONY : sources/json3.cpp.o
+
+sources/json3.i: sources/json3.cpp.i
+
+.PHONY : sources/json3.i
+
+# target to preprocess a source file
+sources/json3.cpp.i:
+	$(MAKE) -f CMakeFiles/json3.dir/build.make CMakeFiles/json3.dir/sources/json3.cpp.i
+.PHONY : sources/json3.cpp.i
+
+sources/json3.s: sources/json3.cpp.s
+
+.PHONY : sources/json3.s
+
+# target to generate assembly for a file
+sources/json3.cpp.s:
+	$(MAKE) -f CMakeFiles/json3.dir/build.make CMakeFiles/json3.dir/sources/json3.cpp.s
+.PHONY : sources/json3.cpp.s
 
 sources/main.o: sources/main.cpp.o
 
@@ -288,15 +328,19 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... edit_cache"
 	@echo "... tests"
 	@echo "... main"
-	@echo "... edit_cache"
+	@echo "... json3"
 	@echo "... Json"
 	@echo "... source"
 	@echo "... test"
-	@echo "... sources/Json.o"
-	@echo "... sources/Json.i"
-	@echo "... sources/Json.s"
+	@echo "... sources/json.o"
+	@echo "... sources/json.i"
+	@echo "... sources/json.s"
+	@echo "... sources/json3.o"
+	@echo "... sources/json3.i"
+	@echo "... sources/json3.s"
 	@echo "... sources/main.o"
 	@echo "... sources/main.i"
 	@echo "... sources/main.s"

@@ -1,4 +1,5 @@
-﻿#include <iostream>
+﻿//Copyright 2019 <mmeshcher>
+#include <iostream>
 #include <fstream>
 
 #include <nlohmann/json.hpp>
@@ -6,7 +7,7 @@
 using json = nlohmann::json;
 
 int main() {
-	std::ifstream in("C:\\Users\Xiaomi\Desktop\labaC++\lab-01-parser\file.json");
+  std::ifstream in(" C : / Git / lab - 01 - parser / file.json ");
 	json obj = json::parse(in);
 	in.close();
 	auto arr1 = obj[0];

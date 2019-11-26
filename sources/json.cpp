@@ -1,3 +1,4 @@
+// Copyright 2019 <mmeshcher>
 #include <iostream>
 #include <vector>
 #include <map>
@@ -44,8 +45,7 @@ void Json::add_property(string key, Json v) {
 	if (v.type != JARRAY && v.type != JOBJECT)
 	{
 		prop.push_back(make_pair(key, ConvertType(v.key, v.type)));
-	}
-	else
+	} else
 	{
 		prop.push_back(make_pair(key, std::any(v)));
 	}
@@ -54,8 +54,7 @@ void Json::add_element(Json v) {
 	if (v.type != JARRAY && v.type != JOBJECT)
 	{
 		arr.push_back(ConvertType(v.key, v.type));
-	}
-	else
+	} else
 	{
 		arr.push_back(std::any(v));
 	}
@@ -116,11 +115,13 @@ int Json::NextWhitespace(const string& source, int i) {
 	while (i < (int)source.length()) {
 		if (source[i] == '"') {
 			i++;
-			while (i < (int)source.length() && (source[i] != '"' || source[i - 1] == '\\')) i++;
+			while (i < (int)source.length()
+			&& (source[i] != '"' || source[i - 1] == '\\')) i++;
 		}
 		if (source[i] == '\'') {
 			i++;
-			while (i < (int)source.length() && (source[i] != '\'' || source[i - 1] == '\\')) i++;
+			while (i < (int)source.length()
+			&& (source[i] != '\'' || source[i - 1] == '\\')) i++;
 		}
 		if (IsWhitespace(source[i])) return i;
 		i++;
@@ -147,14 +148,16 @@ vector<Token> Json::Tokenize(string source) {
 		while (k < str.length()) {
 			if (str[k] == '"') {
 				size_t tmp_k = k + 1;
-				while (tmp_k < str.length() && (str[tmp_k] != '"' || str[tmp_k - 1] == '\\')) tmp_k++;
+				while (tmp_k < str.length() && (str[tmp_k] != '"'
+				|| str[tmp_k - 1] == '\\')) tmp_k++;
 				tokens.push_back(Token(str.substr(k + 1, tmp_k - k - 1), STRING));
 				k = tmp_k + 1;
 				continue;
 			}
 			if (str[k] == '\'') {
 				size_t tmp_k = k + 1;
-				while (tmp_k < str.length() && (str[tmp_k] != '\'' || str[tmp_k - 1] == '\\')) tmp_k++;
+				while (tmp_k < str.length() && (str[tmp_k] != '\''
+				|| str[tmp_k - 1] == '\\')) tmp_k++;
 				tokens.push_back(Token(str.substr(k + 1, tmp_k - k - 1), STRING));
 				k = tmp_k + 1;
 				continue;
@@ -207,7 +210,8 @@ vector<Token> Json::Tokenize(string source) {
 			if (str[k] == '-' || (str[k] <= '9' && str[k] >= '0')) {
 				size_t tmp_k = k;
 				if (str[tmp_k] == '-') tmp_k++;
-				while (tmp_k < str.size() && ((str[tmp_k] <= '9' && str[tmp_k] >= '0') || str[tmp_k] == '.')) tmp_k++;
+				while (tmp_k < str.size() && ((str[tmp_k] <= '9'
+				&& str[tmp_k] >= '0') || str[tmp_k] == '.')) tmp_k++;
 				tokens.push_back(Token(str.substr(k, tmp_k - k), NUMBER));
 				k = tmp_k;
 				continue;
@@ -303,6 +307,7 @@ Json Json::parseFile(const string& filename) {
 	}*/
 	string str = "";
 	string tmp;
+
 	while (getline(in, tmp)) str += tmp;
 	in.close();
 	return Json::parse(str);
